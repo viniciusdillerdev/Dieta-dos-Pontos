@@ -4,144 +4,78 @@
     <meta charset="UTF-8" />
     <title>Dieta dos Pontos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      body {
-        font-family: "Segoe UI", Arial, sans-serif;
-        background: #f7fafc;
-        margin: 0;
-        padding: 0 10px;
-      }
-      h1 {
-        text-align: center;
-        color: #2d3748;
-        margin-top: 24px;
-      }
-      table {
-        border-collapse: collapse;
-        width: 100%;
-        background: #fff;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
-        margin: 20px 0;
-      }
-      th,
-      td {
-        border: 1px solid #e2e8f0;
-        padding: 12px 8px;
-        text-align: center;
-      }
-      th {
-        background: #3182ce;
-        color: #fff;
-        font-weight: 600;
-        letter-spacing: 1px;
-      }
-      tr:nth-child(even) {
-        background: #f1f5f9;
-      }
-      button {
-        background: #38a169;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        padding: 6px 14px;
-        font-size: 1em;
-        cursor: pointer;
-        transition: background 0.2s;
-      }
-      button:hover {
-        background: #276749;
-      }
-      h2 {
-        text-align: center;
-        color: #2d3748;
-        margin-top: 30px;
-      }
-      #total {
-        color: #3182ce;
-        font-weight: bold;
-      }
-      .reset-btn {
-        display: block;
-        margin: 20px auto 40px auto;
-        background: #e53e3e;
-        border-radius: 5px;
-        padding: 8px 20px;
-        font-size: 1em;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-        transition: background 0.2s;
-      }
-      .reset-btn:hover {
-        background: #9b2c2c;
-      }
-      @media (max-width: 600px) {
-        table,
-        thead,
-        tbody,
-        th,
-        td,
-        tr {
-          display: block;
-        }
-        thead tr {
-          display: none;
-        }
-        tr {
-          margin-bottom: 18px;
-          background: #fff;
-          border-radius: 8px;
-          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-        }
-        td {
-          border: none;
-          border-bottom: 1px solid #e2e8f0;
-          position: relative;
-          padding-left: 50%;
-          text-align: left;
-        }
-        td:before {
-          position: absolute;
-          left: 12px;
-          top: 12px;
-          width: 45%;
-          white-space: nowrap;
-          font-weight: bold;
-          color: #3182ce;
-        }
-        td:nth-of-type(1):before {
-          content: "ALIMENTO";
-        }
-        td:nth-of-type(2):before {
-          content: "QUANTIDADE";
-        }
-        td:nth-of-type(3):before {
-          content: "PONTOS";
-        }
-        td:nth-of-type(4):before {
-          content: "Adicionar";
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Sopas e Cremes</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>ALIMENTO</th>
-          <th>QUANTIDADE</th>
-          <th>PONTOS</th>
-          <th>Adicionar</th>
-        </tr>
-      </thead>
-      <tbody id="tabela-alimentos"></tbody>
-    </table>
+    <div class="fixed-total">
+      <div class="fixed-total-content">
+        Total de pontos: <span id="total">0</span>
+      </div>
+      <button class="reset-btn-fixed" onclick="resetar()">
+        Resetar Pontos
+      </button>
+    </div>
+    <button id="toggle-tabela-btn" class="toggle-btn" onclick="toggleTabela()">
+      Ocultar tabela de Molhos e Patês
+    </button>
+    <button
+      id="toggle-tabela-molhos-btn"
+      class="toggle-btn"
+      onclick="toggleTabelaMolhos()"
+    >
+      Ocultar tabela
+    </button>
+    <button
+      id="toggle-tabela-salgadinhos-btn"
+      class="toggle-btn"
+      onclick="toggleTabelaSalgadinhos()"
+    >
+      Ocultar tabela de Salgadinhos
+    </button>
+    <div id="tabela-container">
+      <table>
+        <thead>
+          <h1>Sopas e Cremes</h1>
+          <tr>
+            <th>ALIMENTO</th>
+            <th>QUANTIDADE</th>
+            <th>PONTOS</th>
+            <th>Adicionar</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-alimentos"></tbody>
+      </table>
+    </div>
 
-    <h2>Total de pontos: <span id="total">0</span></h2>
-    <button class="reset-btn" onclick="resetar()">Resetar Pontos</button>
+    <div id="tabela-molhos-container">
+      <table>
+        <thead>
+          <h1>Molhos e Patês</h1>
+          <tr>
+            <th>ALIMENTO</th>
+            <th>QUANTIDADE</th>
+            <th>PONTOS</th>
+            <th>Adicionar</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-molhos"></tbody>
+      </table>
+    </div>
+
+    <div id="tabela-salgadinhos-container">
+      <table>
+        <thead>
+          <h1>Salgadinhos</h1>
+          <tr>
+            <th>ALIMENTO</th>
+            <th>QUANTIDADE</th>
+            <th>PONTOS</th>
+            <th>Adicionar</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-salgadinhos"></tbody>
+      </table>
+    </div>
 
     <script>
       const alimentos = [
@@ -168,6 +102,36 @@
         { nome: "Missoshiro", qtd: "1 concha média", pontos: 17 },
       ];
 
+      const molhos = [
+        { nome: "Babaganuche", qtd: "1 col. (sopa)", pontos: 10 },
+        { nome: "Coalhada fresca", qtd: "1 copo (200 ml)", pontos: 40 },
+        { nome: "Coalhada seca", qtd: "1 col. (sopa)", pontos: 15 },
+        { nome: "Homus", qtd: "1 col. (sopa)", pontos: 15 },
+        { nome: "Ketchup", qtd: "1 col. (sopa)", pontos: 6 },
+        { nome: "Maionese", qtd: "1 col. (sopa)", pontos: 35 },
+        { nome: "Maionese light", qtd: "1 col. (sopa)", pontos: 18 },
+        { nome: "Molho à bolonhesa", qtd: "1 col. (sopa)", pontos: 12 },
+        { nome: "Molho branco", qtd: "1 col. (sopa)", pontos: 20 },
+        { nome: "Molho inglês", qtd: "1 col. (sopa)", pontos: 2 },
+        { nome: "Molho rosê", qtd: "1 col. (sopa)", pontos: 26 },
+        { nome: "Molho tártaro", qtd: "1 col. (sopa)", pontos: 30 },
+        { nome: "Molho de iogurte", qtd: "1 col. (sopa)", pontos: 8 },
+        { nome: "Mostarda", qtd: "1 col. (sopa)", pontos: 5 },
+      ];
+
+      const salgadinhos = [
+        { nome: "Barra de cereais light", qtd: "1 unidade", pontos: 25 },
+        { nome: "Batata chips", qtd: "1 porção (80 g)", pontos: 118 },
+        { nome: "Batata palha", qtd: "1 col. (sopa)", pontos: 20 },
+        { nome: "Biscoito de polvilho", qtd: "1 pacote (50g)", pontos: 60 },
+        { nome: "Ovinho de amendoim", qtd: "1 pacote (200g)", pontos: 250 },
+        { nome: "Pipoca de microondas", qtd: "1 saco médio (50g)", pontos: 55 },
+        { nome: "Salgadinho assado", qtd: "1 unidade pequena", pontos: 20 },
+        { nome: "Salgadinho frito", qtd: "1 unidade pequena", pontos: 30 },
+        { nome: "Salgadinho empanado", qtd: "1 unidade pequena", pontos: 40 },
+        { nome: "Salgadinho de pacote", qtd: "1 pacote médio", pontos: 140 },
+      ];
+
       let total = Number(localStorage.getItem("pontos")) || 0;
       const totalSpan = document.getElementById("total");
       totalSpan.innerText = total;
@@ -185,6 +149,30 @@
         tabela.innerHTML += row;
       });
 
+      const tabelaMolhos = document.getElementById("tabela-molhos");
+      molhos.forEach((molho) => {
+        const row = `
+      <tr>
+        <td>${molho.nome}</td>
+        <td>${molho.qtd}</td>
+        <td>${molho.pontos}</td>
+        <td><button onclick="adicionarPontos(${molho.pontos})">+</button></td>
+      </tr>`;
+        tabelaMolhos.innerHTML += row;
+      });
+
+      const tabelaSalgadinhos = document.getElementById("tabela-salgadinhos");
+      salgadinhos.forEach((item) => {
+        const row = `
+      <tr>
+        <td>${item.nome}</td>
+        <td>${item.qtd}</td>
+        <td>${item.pontos}</td>
+        <td><button onclick="adicionarPontos(${item.pontos})">+</button></td>
+      </tr>`;
+        tabelaSalgadinhos.innerHTML += row;
+      });
+
       function adicionarPontos(valor) {
         total += valor;
         totalSpan.innerText = total;
@@ -195,6 +183,46 @@
         total = 0;
         totalSpan.innerText = total;
         localStorage.removeItem("pontos");
+      }
+
+      function toggleTabela() {
+        const tabelaContainer = document.getElementById("tabela-container");
+        const btn = document.getElementById("toggle-tabela-btn");
+        if (tabelaContainer.style.display === "none") {
+          tabelaContainer.style.display = "";
+          btn.innerText = "Ocultar tabela de Sopas e Cremes";
+        } else {
+          tabelaContainer.style.display = "none";
+          btn.innerText = "Mostrar tabela de Sopas e Cremes";
+        }
+      }
+
+      function toggleTabelaMolhos() {
+        const tabelaContainer = document.getElementById(
+          "tabela-molhos-container"
+        );
+        const btn = document.getElementById("toggle-tabela-molhos-btn");
+        if (tabelaContainer.style.display === "none") {
+          tabelaContainer.style.display = "";
+          btn.innerText = "Ocultar tabela de Molhos e Patês";
+        } else {
+          tabelaContainer.style.display = "none";
+          btn.innerText = "Mostrar tabela de Molhos e Patês";
+        }
+      }
+
+      function toggleTabelaSalgadinhos() {
+        const tabelaContainer = document.getElementById(
+          "tabela-salgadinhos-container"
+        );
+        const btn = document.getElementById("toggle-tabela-salgadinhos-btn");
+        if (tabelaContainer.style.display === "none") {
+          tabelaContainer.style.display = "";
+          btn.innerText = "Ocultar tabela de Salgadinhos";
+        } else {
+          tabelaContainer.style.display = "none";
+          btn.innerText = "Mostrar tabela de Salgadinhos";
+        }
       }
     </script>
   </body>
