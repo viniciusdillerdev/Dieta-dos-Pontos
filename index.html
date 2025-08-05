@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Mamae Dudinha</title>
+  <link rel="stylesheet" href="./assets/css/index.css"> <!-- PASTA DE TODOS OS CSS -->
+
+</head>
+
+<body>
+  <div class="sidebar">                     <!-- SECTION DA SIDEBAR-->
+    <a href="https://www.instagram.com/meloni_cosmeticos/" target="_blank"> <span class="icon">
+      <img src="./assets/imgs/Instagram.png" width="35" height="35"></span> 
+      <span class="text">Instagram</span></a>
+
+    <a href="https://api.whatsapp.com/send/?phone=5521965956437&text&type=phone_number&app_absent=0" target="_blank"> 
+      <span class="icon"> 
+        <img src="./assets/imgs/Whatsap.png"  width="35" height="35"></span>
+      <span class="text"> Whatsapp</span></a></a>
+
+    <a href="#serviço"><span class="icon">💇🏽‍♀️</span> 
+      <span class="text">Serviços</span></a>
+
+    <a href="#agendamento"
+    ><span class="icon">📅</span> <span class="text">Agendamento</span></a>
+  </div>
+  
+  
+
+  <section class="topo">                    <!-- SECTION DO TOPO-->
+    <img src="./assets/imgs/Topo.PNG">
+  </section>
+
+  
+<section id="serviço" class="parte-serviço">         <!-- SECTION SERVIÇOS-->
+
+  <div class="titulo-serviço">            <!-- DIV DO TÍTULO DO SERVIÇOS-->
+    <h1>Serviços Prestados</h1>
+    <span>Colocamos carinho e atenção em cada detalhe para oferecer não só o melhor atendimento para as nossas clientes, como 
+    uma experiência única, com uma crescente preocupação em cuidar também da natureza.</span>
+  
+  </div>
+
+  <div class="serviços">                  <!-- DIV DOS SERVIÇOS-->
+    <div class = "ListaServiço">
+      <div class = "Cabelo"> 
+        <div class="div-nomes">
+          <span class="titulo-nome-serviço">Cabelo</span>
+        <button onclick="CarregarServiço()">
+          <svg id="seta-cabelo"class="seta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="M256 294.1L119.5 157.6c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 294.1z"/>
+          </svg>
+        </button> <!-- ISSO AQUI É O BOTÃO DE CARREGAR. CRIEI UMA FUNÇÃO PARA RELACIONAR A CARREGAR-->
+      </div>
+        <span id="TxtCabelo"></span> <!-- Isso é onde vai ficar armazenado o texto -->
+        <script src="./assets/JS/Cabelo.js"></script> <!-- Isso é onde vai ficar armazenado o Processo do codigo de java! -->
+      </div>
+
+      <div class = "Cilios">
+        <div class="div-nomes">
+        <span class="titulo-nome-serviço">Cílios e Sobrancelha</span>
+        <button onclick="MostrarTextoCilios()">
+          <svg id="seta-cilios" class="seta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="M256 294.1L119.5 157.6c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 294.1z"/>
+          </svg>
+        </button>
+      </div> <!-- ISSO AQUI É O BOTÃO DE CARREGAR. CRIEI UMA FUNÇÃO PARA RELACIONAR A CARREGAR-->
+        <div id="TxtCilios"></div> <!-- Isso é onde vai ficar armazenado o texto -->
+        <script src="./assets/JS/Cilios.js"></script> <!-- Isso é onde vai ficar armazenado o Processo do codigo de java! -->
+      </div>
+
+      <div class="Depilaçao">
+        <div class="div-nomes">
+          <span class="titulo-nome-serviço">Depilação</span>
+          <button onclick="MostrarTextoDepilaçao()">
+            <svg id="seta-depila" class="seta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path d="M256 294.1L119.5 157.6c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 294.1z"/>
+            </svg>
+          </button>
+        </div>
+          <div id="TxtDepilaçao"></div> <!-- Isso é onde vai ficar armazenado o texto -->
+        <script src="./assets/JS/Depilaçao.js"></script>
+      </div>
+      
+      <div class="Estetica">
+      <div class="div-nomes">
+        <span class="titulo-nome-serviço">Estética</span>
+        <button onclick="MostrarTextoEstetica()">
+          <svg id="seta-estetica" class="seta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path d="M256 294.1L119.5 157.6c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 294.1z"/>
+            </svg>
+        </button> <!-- ISSO AQUI É O BOTÃO DE CARREGAR. CRIEI UMA FUNÇÃO PARA RELACIONAR A CARREGAR-->
+      </div>
+        <div id="TxtEstetica"></div> <!-- Isso é onde vai ficar armazenado o texto -->
+        <script src="./assets/JS/Estetica.js"></script> <!-- Isso é onde vai ficar armazenado o Processo do codigo de java! -->
+
+      </div>
+
+      <div class="Pe">
+        <div class="div-nomes">
+        <span class="titulo-nome-serviço">Pé e mão</span>
+        <button onclick="MostrarTextoPe()">
+          <svg id="seta-pe" class="seta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path d="M256 294.1L119.5 157.6c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 294.1z"/>
+            </svg>
+        </button> <!-- ISSO AQUI É O BOTÃO DE CARREGAR. CRIEI UMA FUNÇÃO PARA RELACIONAR A CARREGAR-->
+      </div>
+        <div id="TxtPe"></div> <!-- Isso é onde vai ficar armazenado o texto -->
+        <script src="./assets/JS/Pe.js"></script> <!-- Isso é onde vai ficar armazenado o Processo do codigo de java! -->
+      </div>
+      
+  </div>
+
+  </div>
+</section>       
+
+
+  <section class="slider-container">        <!-- SECTION DO SLIDE-->
+  <div class = "slider">
+    
+    <div class = 'slides'>
+      <!-- Bolinhas do Slide -->
+      <input type="radio" name="botao_radio" id="radio1">
+      <input type="radio" name="botao_radio" id="radio2">
+      <input type="radio" name="botao_radio" id="radio3">
+      <input type="radio" name="botao_radio" id="radio4">
+      <!-- Bolinhas do Slide Final-->
+      
+      <!-- imagem dos slides -->
+      <div class="slide first">
+        <img src="./assets/imgs/Sld1.png" alt="Imagem 1" >
+      </div>
+  
+      <div class="slide">
+        <img src="./assets/imgs/Sld2.png" alt="Imagem 2" >
+        </div>
+        
+        <div class="slide">
+        <img src="./assets/imgs/Sld3.png" alt="Imagem 3" >
+      </div>
+  
+        <div class="slide">
+          <img src="./assets/imgs/Sld4.png" alt="Imagem 4">
+        </div>
+        <!-- imagem dos slides Final -->
+        
+        <!-- Onde vai ficar as bolinhas de navegação -->
+        <div class="navegar">
+          <div class="botao_um"></div>
+          <div class="botao_dois"></div>  
+          <div class="botao_tres"></div>
+          <div class="botao_quatro"></div>
+          <!-- Onde vai ficar as bolinhas de navegação Final -->
+        </div>
+        </div> <!-- Final da div de slides -->
+        
+        <div class="navegar_manualmente"> <!-- Label serve para associar o clique nesse label ao input com id="radio1". Ou seja, quando o usuário clicar nesse label, o botão de rádio com o ID correspondente será selecionado automaticamente.  -->
+          <label for="radio1" class="botao_manual" ></label>
+          <label for="radio2" class="botao_manual" ></label>
+          <label for="radio3" class="botao_manual" ></label>
+          <label for="radio4" class="botao_manual" ></label>
+        </div>
+        
+      </div>
+</section>
+
+
+    <section class="depoimento">            <!-- SECTION DEPOIMENTO-->
+      <h1 class="titulo-depoimento"> DEPOIMENTOS </h1>
+      <ul class='lista-cartoes'>
+
+      <a href="https://www.instagram.com/vinicius.diller/"  target="_blank" class="card-depoimento">
+        <li class='cartao'>
+          <img src="./assets/imgs/Vivi.jpg" >
+            <div class="texto-card">    
+              <h3 class='titulo-terceario'>
+                @Cliente 1
+              </h3>
+              <p class='paragrafo-menor'>
+                Adorei o corte de cabelo! 
+              </p>
+          </div>
+        </li>
+      </a>
+      
+      <a href="https://www.instagram.com/atz_nkt/" target="_blank" class="card-depoimento">
+        <li class='cartao'>
+          <img src="./assets/imgs/vinagre.jpg" >
+             <div class="texto-card">     
+              <h3 class='titulo-terceario'>          
+                @Cliente 2
+              </h3>
+              <p class='paragrafo-menor'>
+                  Adorei o novo formato da minha unha!
+              </p>
+          </div>
+        </li>
+      </a>
+
+      <a href="https://www.instagram.com/arthurfrattani/" target="_blank" class="card-depoimento">
+        <li class='cartao'>
+          <img src="./assets/imgs/Pajé.jpg">
+            <div class="texto-card">  
+              <h3 class='titulo-terceario'>
+                @Cliente 3
+              </h3>
+              <p class='paragrafo-menor'>
+                Salao extremamente limpo e organizado, amei!! de de de de de de de d ed e ded e 
+              </p>
+          </div>  
+        </li> 
+      </a> 
+
+      <a href="https://www.instagram.com/souzadioggo/?hl=en" target="_blank" class="card-depoimento">
+        <li class='cartao'>
+          <img src="./assets/imgs/didizinho.jpg">
+            <div class="texto-card">  
+              <h3 class='titulo-terceario'>
+                @Cliente 4
+              </h3>
+              <p class='paragrafo-menor'>
+                Com certeza voltarei mais vezes, trabalho impecável. de de de de de de de dede de de 
+              </p>
+          </div>  
+        </li> 
+      </a> 
+
+      </ul> 
+  
+  </section>
+  
+
+  <section id="agendamento" class="agendamento">             <!-- SECTION AGENDAMENTO-->
+      <h1>Realce sua beleza com um toque especial</h1>
+      <p>Oferecemos experiências inesquecíveis com foco em bem-estar, sustentabilidade e estilo.</p>
+      <a class="botao-agendemento" href="https://api.whatsapp.com/send/?phone=5521965956437">Agende Agora</a>
+  </section>
+
+  <section class="MAPA">                    <!-- SECTION MAPA-->
+    <div class="texto-mapa">
+    </div>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7348.888088389434!2d-42.48107183062956!3d-22.93386821946825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x975e8fe8a32ea1%3A0x16d51776cfbda5ed!2sGarota%20de%20Ita%C3%BAna!5e0!3m2!1spt-BR!2sbr!4v1745903397027!5m2!1spt-BR!2sbr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  
+  </section>
+
+  <footer id="rodape">                      <!-- SECTION RODAPE-->
+    <div class="conteudo-rodape">
+      <h3>Sobre nós</h3>
+      <span>Somos um salão dedicado a valorizar a beleza única de cada cliente. Com uma equipe especializada e um ambiente acolhedor, oferecemos serviços de cabelo, unhas, maquiagem e bem-estar com qualidade e carinho.</p>
+      </span>
+    </div>
+
+    <div id="contato-rodape" class="conteudo-rodape">
+      <h3>Contato</h3>
+      <span>Telefone: XX XXXXX-XXXX<br>
+      Email: emaildecontato@hotmail.com <br>
+      Endereço: Rua Jaime Warde de Carvalho
+      </span>
+    </div>
+
+    <div class="conteudo-rodape">
+      <h3>Horário de Funcionamento</h3>
+        <span>Segunda a sexta: 8:00 às 17:00 <br>
+        Sábado e Domingo: 10:00 às 14:00
+        </span>
+    </div>
+  </footer>
+
+  <div class="abaixo-rodape">
+    &copy; 2025 Salão de Beleza. Todos os direitos reservados.
+  </div>
+</body>
+
+</html>
