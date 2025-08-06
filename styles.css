@@ -151,6 +151,8 @@ td button:hover {
 }
 
 /* Media Queries para responsividade */
+
+/* Estilos para DESKTOP (telas maiores que 768px) */
 @media (min-width: 768px) {
   body {
     padding: 30px;
@@ -184,67 +186,74 @@ td button:hover {
     max-width: 1200px;
     margin: 0 auto 30px auto;
   }
+}
 
-  /* Responsividade para a tabela em telas pequenas */
-  @media (max-width: 767px) {
-    table,
-    thead,
-    tbody,
-    th,
-    td,
-    tr {
-      display: block;
-    }
+/* Estilos para MOBILE (telas menores que 767px) - AGORA SEPARADO */
+@media (max-width: 767px) {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
 
-    thead tr {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
-    }
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
 
-    tr {
-      border: 1px solid var(--border-color);
-      margin-bottom: 10px;
-    }
+  tr {
+    border: 1px solid var(--border-color);
+    margin-bottom: 10px;
+    border-radius: 8px; /* Adicionado para consistência */
+    overflow: hidden; /* Adicionado para consistência */
+  }
 
-    td {
-      border: none;
-      border-bottom: 1px solid var(--border-color);
-      position: relative;
-      padding-left: 50%;
-      text-align: right;
-    }
+  td {
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+  }
 
-    td:before {
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      width: 45%;
-      padding-right: 10px;
-      white-space: nowrap;
-      text-align: left;
-      font-weight: bold;
-    }
+  tr:last-child td:last-child {
+    border-bottom: none; /* Remove a última borda */
+  }
 
-    /* Mapeamento de conteúdo para células de tabela */
-    td:nth-of-type(1):before {
-      content: "ALIMENTO";
-    }
-    td:nth-of-type(2):before {
-      content: "QUANTIDADE";
-    }
-    td:nth-of-type(3):before {
-      content: "PONTOS";
-    }
-    td:nth-of-type(4):before {
-      content: "Adicionar";
-    }
+  td:before {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+  }
 
-    td button {
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
+  /* Mapeamento de conteúdo para células de tabela */
+  td:nth-of-type(1):before {
+    content: "ALIMENTO";
+  }
+  td:nth-of-type(2):before {
+    content: "QUANTIDADE";
+  }
+  td:nth-of-type(3):before {
+    content: "PONTOS";
+  }
+  td:nth-of-type(4):before {
+    content: "Adicionar";
+  }
+
+  td button {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
