@@ -109,7 +109,7 @@ thead th {
   color: white;
   font-weight: bold;
   padding: 12px 15px;
-  text-align: left;
+  text-align: center;
 }
 
 tbody tr:nth-child(even) {
