@@ -188,7 +188,7 @@ td button:hover {
   }
 }
 
-/* Estilos para MOBILE (telas menores que 767px) - AGORA SEPARADO */
+/* Responsividade para a tabela em telas pequenas */
 @media (max-width: 767px) {
   table,
   thead,
@@ -208,27 +208,32 @@ td button:hover {
   tr {
     border: 1px solid var(--border-color);
     margin-bottom: 10px;
-    border-radius: 8px; /* Adicionado para consistência */
-    overflow: hidden; /* Adicionado para consistência */
   }
 
   td {
     border: none;
     border-bottom: 1px solid var(--border-color);
     position: relative;
-    padding-left: 50%;
-    text-align: right;
+    padding-left: 50%; /* Mantém o espaço para o rótulo */
+    text-align: right; /* Alinha o texto à direita */
+
+    /* --- ALTERAÇÃO 1: MAIS ESPAÇO VERTICAL --- */
+    /* Adiciona um preenchimento superior e inferior a TODAS as células, incluindo "Adicionar" */
+    padding-top: 12px;
+    padding-bottom: 12px;
+    min-height: 44px; /* Garante uma altura mínima para toque */
   }
 
   tr:last-child td:last-child {
-    border-bottom: none; /* Remove a última borda */
+    border-bottom: none;
   }
 
   td:before {
     position: absolute;
+    /* --- ALTERAÇÃO 2: MELHOR ALINHAMENTO VERTICAL DO RÓTULO --- */
     top: 50%;
-    transform: translateY(-50%);
-    left: 15px;
+    transform: translateY(-50%); /* Centraliza o rótulo verticalmente */
+    left: 15px; /* Um pouco de espaço da borda */
     width: 45%;
     padding-right: 10px;
     white-space: nowrap;
