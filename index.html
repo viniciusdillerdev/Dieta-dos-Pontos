@@ -9,21 +9,25 @@
   <body>
     <div class="fixed-total">
       <div class="fixed-total-content">
-        Total de pontos: <span id="total">0</span>
+        Total de pontos do dia: <span id="total">0</span>
       </div>
       <button class="reset-btn-fixed" onclick="resetar()">
         Resetar Pontos
       </button>
     </div>
-    <button id="toggle-tabela-btn" class="toggle-btn" onclick="toggleTabela()">
-      Ocultar tabela de Molhos e Patês
+    <button
+      id="toggle-tabela-btn"
+      class="toggle-btn"
+      onclick="toggleTabelaSopas()"
+    >
+      Ocultar tabela de Sopas e Cremes
     </button>
     <button
       id="toggle-tabela-molhos-btn"
       class="toggle-btn"
       onclick="toggleTabelaMolhos()"
     >
-      Ocultar tabela de Molhos e Sopas
+      Ocultar tabela de Molhos e Patês
     </button>
     <button
       id="toggle-tabela-salgadinhos-btn"
@@ -94,7 +98,7 @@
     </button>
 
     <button
-      id="toggle-tabela-laticions-btn"
+      id="toggle-tabela-laticinios-btn"
       class="toggle-btn"
       onclick="toggleTabelaLaticinios()"
     >
@@ -117,9 +121,7 @@
       Ocultar tabela de Doces e Sorvetes
     </button>
 
-
-
-    <div id="tabela-container">
+    <div id="tabela-sopas-container" style="display: none">
       <table>
         <thead>
           <h1>Sopas e Cremes</h1>
@@ -134,7 +136,7 @@
       </table>
     </div>
 
-    <div id="tabela-molhos-container">
+    <div id="tabela-molhos-container" style="display: none">
       <table>
         <thead>
           <h1>Molhos e Patês</h1>
@@ -149,7 +151,7 @@
       </table>
     </div>
 
-    <div id="tabela-salgadinhos-container">
+    <div id="tabela-salgadinhos-container" style="display: none">
       <table>
         <thead>
           <h1>Salgadinhos</h1>
@@ -164,7 +166,7 @@
       </table>
     </div>
 
-    <div id="tabela-verduras-container">
+    <div id="tabela-verduras-container" style="display: none">
       <table>
         <thead>
           <h1>Verduras e Legumes</h1>
@@ -179,7 +181,7 @@
       </table>
     </div>
 
-    <div id="tabela-carnes-container">
+    <div id="tabela-carnes-container" style="display: none">
       <table>
         <thead>
           <h1>Carnes, Aves e Frios</h1>
@@ -194,7 +196,7 @@
       </table>
     </div>
 
-    <div id="tabela-peixes-container">
+    <div id="tabela-peixes-container" style="display: none">
       <table>
         <thead>
           <h1>Peixes e Frutos do Mar</h1>
@@ -209,7 +211,7 @@
       </table>
     </div>
 
-    <div id="tabela-massas-container">
+    <div id="tabela-massas-container" style="display: none">
       <table>
         <thead>
           <h1>Massas, Pizzas, Tortas e Sanduíches</h1>
@@ -224,7 +226,7 @@
       </table>
     </div>
 
-    <div id="tabela-graos-container">
+    <div id="tabela-graos-container" style="display: none">
       <table>
         <thead>
           <h1>Grãos, Cereais e Raízes</h1>
@@ -239,7 +241,7 @@
       </table>
     </div>
 
-    <div id="tabela-frutas-container">
+    <div id="tabela-frutas-container" style="display: none">
       <table>
         <thead>
           <h1>Frutas</h1>
@@ -254,7 +256,7 @@
       </table>
     </div>
 
-    <div id="tabela-gorduras-container">
+    <div id="tabela-gorduras-container" style="display: none">
       <table>
         <thead>
           <h1>Gorduras e Castanhas</h1>
@@ -269,7 +271,7 @@
       </table>
     </div>
 
-    <div id="tabela-paes-container">
+    <div id="tabela-paes-container" style="display: none">
       <table>
         <thead>
           <h1>Pães e Biscoitos</h1>
@@ -284,7 +286,7 @@
       </table>
     </div>
 
-    <div id="tabela-laticinios-container">
+    <div id="tabela-laticinios-container" style="display: none">
       <table>
         <thead>
           <h1>Laticínios e Ovos</h1>
@@ -299,7 +301,7 @@
       </table>
     </div>
 
-    <div id="tabela-bebidas-container">
+    <div id="tabela-bebidas-container" style="display: none">
       <table>
         <thead>
           <h1>Bebidas</h1>
@@ -314,10 +316,10 @@
       </table>
     </div>
 
-    <div id="tabela-doces-container">
+    <div id="tabela-doces-container" style="display: none">
       <table>
         <thead>
-          <h1>Doces</h1>
+          <h1>Doces e Sorvetes</h1>
           <tr>
             <th>ALIMENTO</th>
             <th>QUANTIDADE</th>
@@ -327,6 +329,7 @@
         </thead>
         <tbody id="tabela-doces"></tbody>
       </table>
+    </div>
 
     <script>
       const alimentos = [
@@ -499,13 +502,6 @@
         { nome: "Beirute sem maionese", qtd: "1 unidade", pontos: 150 },
         { nome: "Big Mac", qtd: "1 unidade", pontos: 164 },
         { nome: "Cachorro-quente", qtd: "1 unidade", pontos: 92 },
-        { nome: "Capelete / ravióli", qtd: "1 unidade", pontos: 50 },
-        { nome: "* Cheeseburger", qtd: "1 unidade", pontos: 120 },
-        { nome: "Americano", qtd: "1 unidade", pontos: 165 },
-        { nome: "Bauru", qtd: "1 unidade", pontos: 110 },
-        { nome: "Beirute sem maionese", qtd: "1 unidade", pontos: 150 },
-        { nome: "Big Mac", qtd: "1 unidade", pontos: 164 },
-        { nome: "Cachorro-quente", qtd: "1 unidade", pontos: 92 },
         { nome: "Capelete / ravioli", qtd: "1 xíc. (chá)", pontos: 50 },
         { nome: "Cheeseburger", qtd: "1 unidade", pontos: 120 },
         { nome: "Cheese salada", qtd: "1 unidade", pontos: 160 },
@@ -635,10 +631,10 @@
         { nome: "Chantilly", qtd: "1 col. (sopa)", pontos: 20 },
         { nome: "Creme de leite", qtd: "1 col. (sopa)", pontos: 17 },
         { nome: "Creme de leite light", qtd: "1 col. (sopa)", pontos: 12 },
-        { nome: "*Maionese light", qtd: "1 col. (sopa)", pontos: 25 },
+        { nome: "Maionese light", qtd: "1 col. (sopa)", pontos: 25 },
         { nome: "Manteiga", qtd: "1 col. (chá)", pontos: 20 },
-        { nome: "*Margarina", qtd: "1 col. (chá)", pontos: 20 },
-        { nome: "*Margarina light", qtd: "1 col. (chá)", pontos: 15 },
+        { nome: "Margarina", qtd: "1 col. (chá)", pontos: 20 },
+        { nome: "Margarina light", qtd: "1 col. (chá)", pontos: 15 },
         { nome: "Noz", qtd: "1 unidade", pontos: 10 },
         { nome: "Óleo vegetal", qtd: "1 col. (sopa)", pontos: 20 },
       ];
@@ -720,15 +716,35 @@
       const bebidas = [
         { nome: "Achocolatado pronto", qtd: "1 unidade (200 ml)", pontos: 55 },
         { nome: "Água-de-coco", qtd: "1 copo (200 ml)", pontos: 10 },
-        { nome: "Batida com leite condensado", qtd: "1 copo (150 ml)", pontos: 75 },
+        {
+          nome: "Batida com leite condensado",
+          qtd: "1 copo (150 ml)",
+          pontos: 75,
+        },
         { nome: "Bebida energética", qtd: "1 lata (330 ml)", pontos: 34 },
-        { nome: "Café com leite desnatado", qtd: "1 xíc. (120 ml)", pontos: 12 },
-        { nome: "Caipirinha de limão com açúcar", qtd: "1 copo (200 ml)", pontos: 49 },
-        { nome: "Caipirinha de limão com adoçante", qtd: "1 copo (200 ml)", pontos: 35 },
+        {
+          nome: "Café com leite desnatado",
+          qtd: "1 xíc. (120 ml)",
+          pontos: 12,
+        },
+        {
+          nome: "Caipirinha de limão com açúcar",
+          qtd: "1 copo (200 ml)",
+          pontos: 49,
+        },
+        {
+          nome: "Caipirinha de limão com adoçante",
+          qtd: "1 copo (200 ml)",
+          pontos: 35,
+        },
         { nome: "Caldo-de-cana", qtd: "1 copo (200 ml)", pontos: 30 },
         { nome: "Capuccino", qtd: "1 xíc. (120 ml)", pontos: 20 },
         { nome: "Cerveja", qtd: "1 lata (350 ml)", pontos: 40 },
-        { nome: "Chá pronto industrializado", qtd: "1 unidade (200 ml)", pontos: 20 },
+        {
+          nome: "Chá pronto industrializado",
+          qtd: "1 unidade (200 ml)",
+          pontos: 20,
+        },
         { nome: "Champanhe", qtd: "1 taça (120 ml)", pontos: 30 },
         { nome: "Chope", qtd: "1 tulipa (300 ml)", pontos: 35 },
         { nome: "Isotônico", qtd: "1 garrafinha (500 ml)", pontos: 35 },
@@ -736,10 +752,26 @@
         { nome: "Refrigerante", qtd: "1 copo (200 ml)", pontos: 23 },
         { nome: "Saquê", qtd: "1/2 copo (100 ml)", pontos: 40 },
         { nome: "Smirnoff Ice", qtd: "1 garrafinha", pontos: 50 },
-        { nome: "Suco de fruta industrializado", qtd: "1 copo (200 ml)", pontos: 35 },
-        { nome: "Suco de fruta industrializado light", qtd: "1 copo (200 ml)", pontos: 35 },
-        { nome: "Suco de laranja sem açúcar", qtd: "1 copo (200 ml)", pontos: 30 },
-        { nome: "Suco de soja com fruta light", qtd: "1 copo (200 ml)", pontos: 15 },
+        {
+          nome: "Suco de fruta industrializado",
+          qtd: "1 copo (200 ml)",
+          pontos: 35,
+        },
+        {
+          nome: "Suco de fruta industrializado light",
+          qtd: "1 copo (200 ml)",
+          pontos: 35,
+        },
+        {
+          nome: "Suco de laranja sem açúcar",
+          qtd: "1 copo (200 ml)",
+          pontos: 30,
+        },
+        {
+          nome: "Suco de soja com fruta light",
+          qtd: "1 copo (200 ml)",
+          pontos: 15,
+        },
         { nome: "Vinho tinto (ou branco)", qtd: "1 taça (120 ml)", pontos: 30 },
         { nome: "Vodca", qtd: "1 dose (40 ml)", pontos: 30 },
       ];
@@ -761,12 +793,24 @@
         { nome: "Bombom", qtd: "1 unidade (30 g)", pontos: 50 },
         { nome: "Brigadeiro", qtd: "1 unidade", pontos: 20 },
         { nome: "Brownie", qtd: "1 unidade pequena", pontos: 14 },
-        { nome: "Cheesecake romeu e julieta light", qtd: "1 fatia média (100 g)", pontos: 70 },
+        {
+          nome: "Cheesecake romeu e julieta light",
+          qtd: "1 fatia média (100 g)",
+          pontos: 70,
+        },
         { nome: "Chocolate ao leite", qtd: "90 g", pontos: 90 },
-        { nome: "Coberturas doces industrializadas", qtd: "1 fatia média (100 g)", pontos: 170 },
+        {
+          nome: "Coberturas doces industrializadas",
+          qtd: "1 fatia média (100 g)",
+          pontos: 170,
+        },
         { nome: "Cocada", qtd: "1 barra pequena (100 g)", pontos: 100 },
         { nome: "Creme de papaia", qtd: "1 col. (sopa)", pontos: 20 },
-        { nome: "Creme de chocolate e avelã (tipo Nutella)", qtd: "1 unidade pequena (100 g)", pontos: 100 },
+        {
+          nome: "Creme de chocolate e avelã (tipo Nutella)",
+          qtd: "1 unidade pequena (100 g)",
+          pontos: 100,
+        },
         { nome: "Doce de leite", qtd: "1 col. (sopa)", pontos: 80 },
         { nome: "Doce de leite diet", qtd: "1 col. (sopa)", pontos: 40 },
         { nome: "Frozen yogurt", qtd: "1 col. (sopa)", pontos: 20 },
@@ -777,11 +821,19 @@
         { nome: "Goiabada", qtd: "1 col. (sopa)", pontos: 7 },
         { nome: "Mel", qtd: "1 fatia fina", pontos: 20 },
         { nome: "Merengue", qtd: "1 col. (sopa)", pontos: 13 },
-        { nome: "Mousse de chocolate", qtd: "1 taça pequena (100 g)", pontos: 60 },
+        {
+          nome: "Mousse de chocolate",
+          qtd: "1 taça pequena (100 g)",
+          pontos: 60,
+        },
         { nome: "Paçoca", qtd: "1 col. (sopa)", pontos: 20 },
         { nome: "Pavê", qtd: "1 unidade (30 g)", pontos: 35 },
         { nome: "Pão de mel", qtd: "1 col. (sopa)", pontos: 20 },
-        { nome: "Petit gateau industrializado", qtd: "1 unidade pequena (20 g)", pontos: 30 },
+        {
+          nome: "Petit gateau industrializado",
+          qtd: "1 unidade pequena (20 g)",
+          pontos: 30,
+        },
         { nome: "Picolé (com leite)", qtd: "1 unidade", pontos: 55 },
         { nome: "Picolé (sem leite)", qtd: "1 unidade", pontos: 55 },
         { nome: "Sagu", qtd: "1 col. (sopa)", pontos: 19 },
@@ -789,8 +841,12 @@
         { nome: "Sonho", qtd: "1 unidade", pontos: 11 },
         { nome: "Sorvete de massa", qtd: "1 unidade", pontos: 140 },
         { nome: "Sorvete de massa diet/light", qtd: "1 bola", pontos: 55 },
-        { nome: "Sorvete de massa diet/light", qtd: "3 col. (sopa)", pontos: 15 },
-      ];      
+        {
+          nome: "Sorvete de massa diet/light",
+          qtd: "3 col. (sopa)",
+          pontos: 15,
+        },
+      ];
 
       let total = Number(localStorage.getItem("pontos")) || 0;
       const totalSpan = document.getElementById("total");
@@ -977,9 +1033,12 @@
         localStorage.removeItem("pontos");
       }
 
-      function toggleTabelaLaticinios() {
-        const tabelaContainer = document.getElementById("tabela-container");
-        const btn = document.getElementById("toggle-tabela-laticinios-btn");
+      // FUNÇÃO CORRIGIDA
+      function toggleTabelaSopas() {
+        const tabelaContainer = document.getElementById(
+          "tabela-sopas-container"
+        );
+        const btn = document.getElementById("toggle-tabela-btn");
         if (tabelaContainer.style.display === "none") {
           tabelaContainer.style.display = "";
           btn.innerText = "Ocultar tabela de Sopas e Cremes";
@@ -1131,6 +1190,7 @@
         }
       }
 
+      // FUNÇÃO CORRIGIDA
       function toggleTabelaLaticinios() {
         const tabelaContainer = document.getElementById(
           "tabela-laticinios-container"
@@ -1146,7 +1206,9 @@
       }
 
       function toggleTabelaBebidas() {
-        const tabelaContainer = document.getElementById("tabela-bebidas-container");
+        const tabelaContainer = document.getElementById(
+          "tabela-bebidas-container"
+        );
         const btn = document.getElementById("toggle-tabela-bebidas-btn");
         if (tabelaContainer.style.display === "none") {
           tabelaContainer.style.display = "";
@@ -1158,7 +1220,9 @@
       }
 
       function toggleTabelaDoces() {
-        const tabelaContainer = document.getElementById("tabela-doces-container");
+        const tabelaContainer = document.getElementById(
+          "tabela-doces-container"
+        );
         const btn = document.getElementById("toggle-tabela-doces-btn");
         if (tabelaContainer.style.display === "none") {
           tabelaContainer.style.display = "";

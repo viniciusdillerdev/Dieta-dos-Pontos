@@ -1,171 +1,250 @@
-body {
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: #f7fafc;
-  margin: 0;
-  padding: 0 10px;
-  padding-top: 56px; /* espaço para o total fixo */
+/* Configurações básicas e tipografia */
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --background-color: #f8f9fa;
+  --card-background: #ffffff;
+  --header-background: #0056b3;
+  --text-color: #333;
+  --border-color: #dee2e6;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* Estilo para a barra fixa de total de pontos */
+.fixed-total {
+  position: sticky;
+  top: 0;
+  background-color: var(--card-background);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.fixed-total-content {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+.fixed-total-content #total {
+  color: var(--primary-color);
+}
+
+/* Estilo para os botões de toggle */
+.toggle-btn {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s ease;
+  width: 100%;
+}
+
+.toggle-btn:hover {
+  background-color: #5a6268;
+}
+
+.toggle-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.5);
+}
+
+.reset-btn-fixed {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s ease;
+}
+
+.reset-btn-fixed:hover {
+  background-color: #c82333;
+}
+
+/* Layout das tabelas */
 h1 {
   text-align: center;
-  color: #2d3748;
-  margin-top: 24px;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-size: 1.5em;
 }
+
 table {
-  border-collapse: collapse;
   width: 100%;
-  background: #fff;
-  border-radius: 10px;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
-  margin: 20px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: var(--card-background);
 }
-th,
+
+thead th {
+  background-color: var(--header-background);
+  color: white;
+  font-weight: bold;
+  padding: 12px 15px;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+  background-color: #e9ecef;
+}
+
 td {
-  border: 1px solid #e2e8f0;
-  padding: 12px 8px;
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+td:nth-child(2),
+td:nth-child(3) {
   text-align: center;
 }
-th {
-  background: #3182ce;
-  color: #fff;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-tr:nth-child(even) {
-  background: #f1f5f9;
-}
-button {
-  background: #38a169;
-  color: #fff;
+
+td button {
+  background-color: #28a745;
+  color: white;
   border: none;
+  padding: 5px 10px;
   border-radius: 5px;
-  padding: 6px 14px;
-  font-size: 1em;
   cursor: pointer;
-  transition: background 0.2s;
-}
-button:hover {
-  background: #276749;
-}
-h2 {
-  text-align: center;
-  color: #2d3748;
-  margin-top: 30px;
-}
-#total {
-  color: #3182ce;
   font-weight: bold;
+  transition: background-color 0.2s ease;
 }
-.reset-btn {
-  display: block;
-  margin: 20px auto 40px auto;
-  background: #e53e3e;
-  border-radius: 5px;
-  padding: 8px 20px;
-  font-size: 1em;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s;
+
+td button:hover {
+  background-color: #218838;
 }
-.reset-btn:hover {
-  background: #9b2c2c;
+
+/* Oculta as tabelas por padrão */
+[id^="tabela-"][id$="-container"] {
+  display: block; /* Garante que as tabelas estejam visíveis inicialmente */
 }
-.toggle-btn {
-  display: block;
-  width: 20%;
-  margin-bottom: 10px;
-}
-.fixed-total {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  background: #fff;
-  color: #3182ce;
-  font-weight: bold;
-  font-size: 1.3em;
-  text-align: center;
-  padding: 12px 0 8px 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.fixed-total-content {
-  flex: 1;
-  text-align: center;
-}
-.reset-btn-fixed {
-  margin-right: 24px;
-  margin-left: auto;
-  background: #e53e3e;
-  border-radius: 5px;
-  padding: 8px 20px;
-  font-size: 1em;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.reset-btn-fixed:hover {
-  background: #9b2c2c;
-}
-@media (max-width: 600px) {
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
-    display: block;
+
+/* Media Queries para responsividade */
+@media (min-width: 768px) {
+  body {
+    padding: 30px;
   }
-  thead tr {
-    display: none;
-  }
-  tr {
-    margin-bottom: 18px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-  }
-  td {
-    border: none;
-    border-bottom: 1px solid #e2e8f0;
-    position: relative;
-    padding-left: 50%;
-    text-align: left;
-  }
-  td:before {
-    position: absolute;
-    left: 12px;
-    top: 12px;
-    width: 45%;
-    white-space: nowrap;
-    font-weight: bold;
-    color: #3182ce;
-  }
-  td:nth-of-type(1):before {
-    content: "ALIMENTO";
-  }
-  td:nth-of-type(2):before {
-    content: "QUANTIDADE";
-  }
-  td:nth-of-type(3):before {
-    content: "PONTOS";
-  }
-  td:nth-of-type(4):before {
-    content: "Adicionar";
-  }
+
   .fixed-total {
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px 0 8px 0;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 30px auto;
   }
-  .reset-btn-fixed {
-    margin: 0;
-    width: 90vw;
-    max-width: 300px;
+
+  .toggle-btn {
+    width: auto;
+    margin: 5px 10px;
+  }
+
+  /* Organiza os botões em uma única linha no desktop */
+  .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  table {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 30px auto;
+  }
+
+  /* Responsividade para a tabela em telas pequenas */
+  @media (max-width: 767px) {
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+      display: block;
+    }
+
+    thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    tr {
+      border: 1px solid var(--border-color);
+      margin-bottom: 10px;
+    }
+
+    td {
+      border: none;
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+      padding-left: 50%;
+      text-align: right;
+    }
+
+    td:before {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    /* Mapeamento de conteúdo para células de tabela */
+    td:nth-of-type(1):before {
+      content: "ALIMENTO";
+    }
+    td:nth-of-type(2):before {
+      content: "QUANTIDADE";
+    }
+    td:nth-of-type(3):before {
+      content: "PONTOS";
+    }
+    td:nth-of-type(4):before {
+      content: "Adicionar";
+    }
+
+    td button {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
 }
