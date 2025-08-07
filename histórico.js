@@ -26,8 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const historico = JSON.parse(localStorage.getItem("historicoPontos")) || [];
     listaHistorico.innerHTML = "";
 
-    // --- ALTERAÇÃO AQUI ---
-    // Agora, para cada item, também pegamos seu "index" (posição) no array.
     historico.forEach((item, index) => {
       const li = document.createElement("li");
 
@@ -64,10 +62,14 @@ document.addEventListener("DOMContentLoaded", () => {
       data: dataFormatada,
       pontos: totalPontosHoje,
     };
-    historico.push(novoRegistro);
+
+    // --- ALTERAÇÃO PRINCIPAL AQUI ---
+    // Em vez de .push(), usamos .unshift() para adicionar no início da lista.
+    historico.unshift(novoRegistro);
+
     localStorage.setItem("historicoPontos", JSON.stringify(historico));
     alert(
-      `Dia ${dataFormatada} salvo com ${totalPontosHoje} pontos!\n Role para baixo para ver o histórico.`
+      `Dia ${dataFormatada} salvo com ${totalPontosHoje} pontos!\nDeslize para baixo para ver o histórico.`
     );
     carregarHistorico();
     if (typeof resetar === "function") {
