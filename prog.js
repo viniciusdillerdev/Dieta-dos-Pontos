@@ -2,384 +2,210 @@ let total = Number(localStorage.getItem("pontos")) || 0;
 const totalSpan = document.getElementById("total");
 totalSpan.innerText = total;
 
-const tabela = document.getElementById("tabela-alimentos");
+// Armazena a contagem de cada alimento, carregando do localStorage se existir
+const alimentosSelecionados =
+  JSON.parse(localStorage.getItem("alimentosSelecionados")) || {};
 
-alimentos.forEach((alimento) => {
-  const row = `
+function criarLinha(item, tabelaId) {
+  const id = `${tabelaId}-${item.nome.replace(/\s+/g, "-")}`;
+  // Se o item não estiver no nosso objeto de contagem, inicializa com 0
+  if (!alimentosSelecionados[id]) {
+    alimentosSelecionados[id] = 0;
+  }
+  // Gera o HTML da linha da tabela com a nova estrutura de ações
+  return `
         <tr>
-          <td>${alimento.nome}</td>
-          <td>${alimento.qtd}</td>
-          <td>${alimento.pontos}</td>
-          <td><button onclick="adicionarPontos(${alimento.pontos})">+</button></td>
+          <td>${item.nome}</td>
+          <td>${item.qtd}</td>
+          <td>${item.pontos}</td>
+          <td class="actions-cell">
+            <button class="remove-btn" onclick="removerPontos(${item.pontos}, '${id}')">-</button>
+            <span id="${id}">${alimentosSelecionados[id]}</span>
+            <button onclick="adicionarPontos(${item.pontos}, '${id}')">+</button>
+          </td>
         </tr>`;
-  tabela.innerHTML += row;
-});
+}
 
-const tabelaMolhos = document.getElementById("tabela-molhos");
-molhos.forEach((molho) => {
-  const row = `
-      <tr>
-        <td>${molho.nome}</td>
-        <td>${molho.qtd}</td>
-        <td>${molho.pontos}</td>
-        <td><button onclick="adicionarPontos(${molho.pontos})">+</button></td>
-      </tr>`;
-  tabelaMolhos.innerHTML += row;
-});
+function preencherTabela(lista, tabelaId) {
+  const tabela = document.getElementById(tabelaId);
+  tabela.innerHTML = ""; // Limpa a tabela antes de preencher
+  lista.forEach((item) => {
+    tabela.innerHTML += criarLinha(item, tabelaId);
+  });
+}
 
-const tabelaSalgadinhos = document.getElementById("tabela-salgadinhos");
-salgadinhos.forEach((item) => {
-  const row = `
-      <tr>
-        <td>${item.nome}</td>
-        <td>${item.qtd}</td>
-        <td>${item.pontos}</td>
-        <td><button onclick="adicionarPontos(${item.pontos})">+</button></td>
-      </tr>`;
-  tabelaSalgadinhos.innerHTML += row;
-});
+// Preenche todas as tabelas na inicialização
+preencherTabela(alimentos, "tabela-alimentos");
+preencherTabela(molhos, "tabela-molhos");
+preencherTabela(salgadinhos, "tabela-salgadinhos");
+preencherTabela(verduras, "tabela-verduras");
+preencherTabela(carnes, "tabela-carnes");
+preencherTabela(peixes, "tabela-peixes");
+preencherTabela(massas, "tabela-massas");
+preencherTabela(graosCereaisRaizes, "tabela-graos");
+preencherTabela(frutas, "tabela-frutas");
+preencherTabela(gordurasECastanhas, "tabela-gorduras");
+preencherTabela(paesEBiscoitos, "tabela-paes");
+preencherTabela(laticiniosEOvo, "tabela-laticinios");
+preencherTabela(bebidas, "tabela-bebidas");
+preencherTabela(docesESorvetes, "tabela-doces");
 
-const tabelaVerduras = document.getElementById("tabela-verduras");
-verduras.forEach((verdura) => {
-  const row = `
-      <tr>
-        <td>${verdura.nome}</td>
-        <td>${verdura.qtd}</td>
-        <td>${verdura.pontos}</td>
-        <td><button onclick="adicionarPontos(${verdura.pontos})">+</button></td>
-      </tr>`;
-  tabelaVerduras.innerHTML += row;
-});
-
-const tabelaCarnes = document.getElementById("tabela-carnes");
-carnes.forEach((item) => {
-  const row = `
-    <tr>
-      <td>${item.nome}</td>
-      <td>${item.qtd}</td>
-      <td>${item.pontos}</td>
-      <td><button onclick="adicionarPontos(${item.pontos})">+</button></td>
-    </tr>`;
-  tabelaCarnes.innerHTML += row;
-});
-
-const tabelaPeixes = document.getElementById("tabela-peixes");
-peixes.forEach((item) => {
-  const row = `
-    <tr>
-      <td>${item.nome}</td>
-      <td>${item.qtd}</td>
-      <td>${item.pontos}</td>
-      <td><button onclick="adicionarPontos(${item.pontos})">+</button></td>
-    </tr>`;
-  tabelaPeixes.innerHTML += row;
-});
-
-const tabelaMassas = document.getElementById("tabela-massas");
-massas.forEach((item) => {
-  const row = `
-    <tr>
-      <td>${item.nome}</td>
-      <td>${item.qtd}</td>
-      <td>${item.pontos}</td>
-      <td><button onclick="adicionarPontos(${item.pontos})">+</button></td>
-    </tr>`;
-  tabelaMassas.innerHTML += row;
-});
-
-const tabelaGraos = document.getElementById("tabela-graos");
-graosCereaisRaizes.forEach((item) => {
-  const row = `
-    <tr>
-      <td>${item.nome}</td>
-      <td>${item.qtd}</td>
-      <td>${item.pontos}</td>
-      <td><button onclick="adicionarPontos(${item.pontos})">+</button></td>
-    </tr>`;
-  tabelaGraos.innerHTML += row;
-});
-
-const tabelaFrutas = document.getElementById("tabela-frutas");
-frutas.forEach((item) => {
-  const row = `
-    <tr>
-      <td>${item.nome}</td>
-      <td>${item.qtd}</td>
-      <td>${item.pontos}</td>
-      <td><button onclick="adicionarPontos(${item.pontos})">+</button></td>
-    </tr>`;
-  tabelaFrutas.innerHTML += row;
-});
-
-const tabelaGorduras = document.getElementById("tabela-gorduras");
-gordurasECastanhas.forEach((item) => {
-  const row = `
-    <tr>
-      <td>${item.nome}</td>
-      <td>${item.qtd}</td>
-      <td>${item.pontos}</td>
-      <td><button onclick="adicionarPontos(${item.pontos})">+</button></td>
-    </tr>`;
-  tabelaGorduras.innerHTML += row;
-});
-
-const tabelaPaes = document.getElementById("tabela-paes");
-paesEBiscoitos.forEach((item) => {
-  const row = ` 
-    <tr>
-      <td>${item.nome}</td> 
-      <td>${item.qtd}</td>
-      <td>${item.pontos}</td>
-      <td><button onclick="adicionarPontos(${item.pontos})">+</button></td>
-    </tr>`;
-  tabelaPaes.innerHTML += row;
-});
-
-const tabelaLaticinios = document.getElementById("tabela-laticinios");
-laticiniosEOvo.forEach((item) => {
-  const row = `
-    <tr>
-      <td>${item.nome}</td>
-      <td>${item.qtd}</td>
-      <td>${item.pontos}</td>
-      <td><button onclick="adicionarPontos(${item.pontos})">+</button></td>
-    </tr>`;
-  tabelaLaticinios.innerHTML += row;
-});
-
-const tabelaBebidas = document.getElementById("tabela-bebidas");
-bebidas.forEach((item) => {
-  const row = `
-    <tr>
-      <td>${item.nome}</td>
-      <td>${item.qtd}</td>
-      <td>${item.pontos}</td>
-      <td><button onclick="adicionarPontos(${item.pontos})">+</button></td>
-    </tr>`;
-  tabelaBebidas.innerHTML += row;
-});
-
-const tabelaDoces = document.getElementById("tabela-doces");
-docesESorvetes.forEach((item) => {
-  const row = `
-    <tr>
-      <td>${item.nome}</td>
-      <td>${item.qtd}</td>
-      <td>${item.pontos}</td>
-      <td><button onclick="adicionarPontos(${item.pontos})">+</button></td>
-    </tr>`;
-  tabelaDoces.innerHTML += row;
-});
-
-function adicionarPontos(valor) {
+function adicionarPontos(valor, id) {
   total += valor;
+  alimentosSelecionados[id]++;
+  atualizarTudo();
+}
+
+function removerPontos(valor, id) {
+  // Só remove se a quantidade for maior que 0
+  if (alimentosSelecionados[id] > 0) {
+    total -= valor;
+    alimentosSelecionados[id]--;
+    atualizarTudo();
+  }
+}
+
+function atualizarTudo() {
+  // Atualiza o total de pontos na tela
   totalSpan.innerText = total;
+  // Salva o total e a contagem de itens no localStorage
   localStorage.setItem("pontos", total);
+  localStorage.setItem(
+    "alimentosSelecionados",
+    JSON.stringify(alimentosSelecionados)
+  );
+
+  // Atualiza todos os contadores na tela
+  for (const id in alimentosSelecionados) {
+    const contadorSpan = document.getElementById(id);
+    if (contadorSpan) {
+      contadorSpan.innerText = alimentosSelecionados[id];
+    }
+  }
 }
 
 function resetar() {
   total = 0;
-  totalSpan.innerText = total;
+  // Zera a contagem de todos os alimentos
+  for (const id in alimentosSelecionados) {
+    alimentosSelecionados[id] = 0;
+  }
+  // Remove os dados do localStorage e atualiza a tela
   localStorage.removeItem("pontos");
+  localStorage.removeItem("alimentosSelecionados");
+  atualizarTudo();
 }
 
-// FUNÇÃO CORRIGIDA
+// --- FUNÇÃO CORRIGIDA ---
+function toggleTabela(containerId, btnId, nomeTabela) {
+  const tabelaContainer = document.getElementById(containerId);
+  const btn = document.getElementById(btnId);
+
+  // Verifica se a tabela está escondida
+  if (
+    tabelaContainer.style.display === "none" ||
+    tabelaContainer.style.display === ""
+  ) {
+    // AQUI ESTÁ A CORREÇÃO: define explicitamente como 'block' para exibir
+    tabelaContainer.style.display = "block";
+    btn.style.backgroundColor = "blue";
+    btn.innerText = `Ocultar tabela de ${nomeTabela}`;
+  } else {
+    // Esconde a tabela
+    tabelaContainer.style.display = "none";
+    btn.style.backgroundColor = "var(--secondary-color)";
+    btn.innerText = `Mostrar tabela de ${nomeTabela}`;
+  }
+}
+
+// Chamadas das funções de toggle (sem alteração)
 function toggleTabelaSopas() {
-  const tabelaContainer = document.getElementById("tabela-sopas-container");
-  const btn = document.getElementById("toggle-tabela-btn");
-  if (tabelaContainer.style.display === "none") {
-    (tabelaContainer.style.display = ""), (btn.style.backgroundColor = "blue");
-    btn.innerText = "Ocultar tabela de Sopas e Cremes";
-  } else {
-    tabelaContainer.style.display = "none";
-    btn.style.backgroundColor = "var(--secondary-color)";
-    btn.innerText = "Mostrar tabela de Sopas e Cremes";
-  }
+  toggleTabela("tabela-sopas-container", "toggle-tabela-btn", "Sopas e Cremes");
 }
-
 function toggleTabelaMolhos() {
-  const tabelaContainer = document.getElementById("tabela-molhos-container");
-  const btn = document.getElementById("toggle-tabela-molhos-btn");
-  if (tabelaContainer.style.display === "none") {
-    tabelaContainer.style.display = "";
-    btn.style.backgroundColor = "blue";
-    btn.innerText = "Ocultar tabela de Molhos e Patês";
-  } else {
-    tabelaContainer.style.display = "none";
-    btn.style.backgroundColor = "var(--secondary-color)";
-    btn.innerText = "Mostrar tabela de Molhos e Patês";
-  }
+  toggleTabela(
+    "tabela-molhos-container",
+    "toggle-tabela-molhos-btn",
+    "Molhos e Patês"
+  );
 }
-
 function toggleTabelaSalgadinhos() {
-  const tabelaContainer = document.getElementById(
-    "tabela-salgadinhos-container"
+  toggleTabela(
+    "tabela-salgadinhos-container",
+    "toggle-tabela-salgadinhos-btn",
+    "Salgadinhos"
   );
-  const btn = document.getElementById("toggle-tabela-salgadinhos-btn");
-  if (tabelaContainer.style.display === "none") {
-    tabelaContainer.style.display = "";
-    btn.style.backgroundColor = "blue";
-    btn.innerText = "Ocultar tabela de Salgadinhos";
-  } else {
-    tabelaContainer.style.display = "none";
-    btn.style.backgroundColor = "var(--secondary-color)";
-    btn.innerText = "Mostrar tabela de Salgadinhos";
-  }
 }
-
 function toggleTabelaVerduras() {
-  const tabelaContainer = document.getElementById("tabela-verduras-container");
-  const btn = document.getElementById("toggle-tabela-verduras-btn");
-  if (tabelaContainer.style.display === "none") {
-    tabelaContainer.style.display = "";
-    btn.style.backgroundColor = "blue";
-    btn.innerText = "Ocultar tabela de Verduras e Legumes";
-  } else {
-    tabelaContainer.style.display = "none";
-    btn.style.backgroundColor = "var(--secondary-color)";
-    btn.innerText = "Mostrar tabela de Verduras e Legumes";
-  }
-}
-
-function toggleTabelaCarnes() {
-  const tabelaContainer = document.getElementById("tabela-carnes-container");
-  const btn = document.getElementById("toggle-tabela-carnes-btn");
-  if (tabelaContainer.style.display === "none") {
-    tabelaContainer.style.display = "";
-    btn.style.backgroundColor = "blue";
-    btn.innerText = "Ocultar tabela de Carnes, Aves e Frios";
-  } else {
-    tabelaContainer.style.display = "none";
-    btn.style.backgroundColor = "var(--secondary-color)";
-    btn.innerText = "Mostrar tabela de Carnes, Aves e Frios";
-  }
-}
-
-function toggleTabelaPeixes() {
-  const tabelaContainer = document.getElementById("tabela-peixes-container");
-  const btn = document.getElementById("toggle-tabela-peixes-btn");
-  if (tabelaContainer.style.display === "none") {
-    tabelaContainer.style.display = "";
-    btn.style.backgroundColor = "blue";
-    btn.innerText = "Ocultar tabela de Peixes e Frutos do Mar";
-  } else {
-    tabelaContainer.style.display = "none";
-    btn.style.backgroundColor = "var(--secondary-color)";
-    btn.innerText = "Mostrar tabela de Peixes e Frutos do Mar";
-  }
-}
-
-function toggleTabelaMassas() {
-  const tabelaContainer = document.getElementById("tabela-massas-container");
-  const btn = document.getElementById("toggle-tabela-massas-btn");
-  if (tabelaContainer.style.display === "none") {
-    tabelaContainer.style.display = "";
-    btn.style.backgroundColor = "blue";
-    btn.innerText = "Ocultar tabela de Massas, Pizzas, Tortas e Sanduíches";
-  } else {
-    tabelaContainer.style.display = "none";
-    btn.style.backgroundColor = "var(--secondary-color)";
-    btn.innerText = "Mostrar tabela de Massas, Pizzas, Tortas e Sanduíches";
-  }
-}
-
-function toggleTabelaGraos() {
-  const tabelaContainer = document.getElementById("tabela-graos-container");
-  const btn = document.getElementById("toggle-tabela-graos-btn");
-  if (tabelaContainer.style.display === "none") {
-    tabelaContainer.style.display = "";
-    btn.style.backgroundColor = "blue";
-    btn.innerText = "Ocultar tabela de Grãos, Cereais e Raízes";
-  } else {
-    tabelaContainer.style.display = "none";
-    btn.style.backgroundColor = "var(--secondary-color)";
-    btn.innerText = "Mostrar tabela de Grãos, Cereais e Raízes";
-  }
-}
-
-function toggleTabelaFrutas() {
-  const tabelaContainer = document.getElementById("tabela-frutas-container");
-  const btn = document.getElementById("toggle-tabela-frutas-btn");
-  if (tabelaContainer.style.display === "none") {
-    tabelaContainer.style.display = "";
-    btn.style.backgroundColor = "blue";
-    btn.innerText = "Ocultar tabela de Frutas";
-  } else {
-    tabelaContainer.style.display = "none";
-    btn.style.backgroundColor = "var(--secondary-color)";
-    btn.innerText = "Mostrar tabela de Frutas";
-  }
-}
-
-function toggleTabelaGorduras() {
-  const tabelaContainer = document.getElementById("tabela-gorduras-container");
-  const btn = document.getElementById("toggle-tabela-gorduras-btn");
-  if (tabelaContainer.style.display === "none") {
-    tabelaContainer.style.display = "";
-    btn.style.backgroundColor = "blue";
-    btn.innerText = "Ocultar tabela de Gorduras e Castanhas";
-  } else {
-    tabelaContainer.style.display = "none";
-    btn.style.backgroundColor = "var(--secondary-color)";
-    btn.innerText = "Mostrar tabela de Gorduras e Castanhas";
-  }
-}
-
-function toggleTabelaPaes() {
-  const tabelaContainer = document.getElementById("tabela-paes-container");
-  const btn = document.getElementById("toggle-tabela-paes-btn");
-  if (tabelaContainer.style.display === "none") {
-    tabelaContainer.style.display = "";
-    btn.style.backgroundColor = "blue";
-    btn.innerText = "Ocultar tabela de Pães e Biscoitos";
-  } else {
-    tabelaContainer.style.display = "none";
-    btn.style.backgroundColor = "var(--secondary-color)";
-    btn.innerText = "Mostrar tabela de Pães e Biscoitos";
-  }
-}
-
-// FUNÇÃO CORRIGIDA
-function toggleTabelaLaticinios() {
-  const tabelaContainer = document.getElementById(
-    "tabela-laticinios-container"
+  toggleTabela(
+    "tabela-verduras-container",
+    "toggle-tabela-verduras-btn",
+    "Verduras e Legumes"
   );
-  const btn = document.getElementById("toggle-tabela-laticinios-btn");
-  if (tabelaContainer.style.display === "none") {
-    tabelaContainer.style.display = "";
-    btn.style.backgroundColor = "blue";
-    btn.innerText = "Ocultar tabela de Laticínios e Ovos";
-  } else {
-    tabelaContainer.style.display = "none";
-    btn.style.backgroundColor = "var(--secondary-color)";
-    btn.innerText = "Mostrar tabela de Laticínios e Ovos";
-  }
 }
-
+function toggleTabelaCarnes() {
+  toggleTabela(
+    "tabela-carnes-container",
+    "toggle-tabela-carnes-btn",
+    "Carnes, Aves e Frios"
+  );
+}
+function toggleTabelaPeixes() {
+  toggleTabela(
+    "tabela-peixes-container",
+    "toggle-tabela-peixes-btn",
+    "Peixes e Frutos do Mar"
+  );
+}
+function toggleTabelaMassas() {
+  toggleTabela(
+    "tabela-massas-container",
+    "toggle-tabela-massas-btn",
+    "Massas, Pizzas, Tortas e Sanduíches"
+  );
+}
+function toggleTabelaGraos() {
+  toggleTabela(
+    "tabela-graos-container",
+    "toggle-tabela-graos-btn",
+    "Grãos, Cereais e Raízes"
+  );
+}
+function toggleTabelaFrutas() {
+  toggleTabela("tabela-frutas-container", "toggle-tabela-frutas-btn", "Frutas");
+}
+function toggleTabelaGorduras() {
+  toggleTabela(
+    "tabela-gorduras-container",
+    "toggle-tabela-gorduras-btn",
+    "Gorduras e Castanhas"
+  );
+}
+function toggleTabelaPaes() {
+  toggleTabela(
+    "tabela-paes-container",
+    "toggle-tabela-paes-btn",
+    "Pães e Biscoitos"
+  );
+}
+function toggleTabelaLaticinios() {
+  toggleTabela(
+    "tabela-laticinios-container",
+    "toggle-tabela-laticinios-btn",
+    "Laticínios e Ovos"
+  );
+}
 function toggleTabelaBebidas() {
-  const tabelaContainer = document.getElementById("tabela-bebidas-container");
-  const btn = document.getElementById("toggle-tabela-bebidas-btn");
-  if (tabelaContainer.style.display === "none") {
-    tabelaContainer.style.display = "";
-    btn.style.backgroundColor = "blue";
-    btn.innerText = "Ocultar tabela de Bebidas";
-  } else {
-    tabelaContainer.style.display = "none";
-    btn.style.backgroundColor = "var(--secondary-color)";
-    btn.innerText = "Mostrar tabela de Bebidas";
-  }
+  toggleTabela(
+    "tabela-bebidas-container",
+    "toggle-tabela-bebidas-btn",
+    "Bebidas"
+  );
 }
-
 function toggleTabelaDoces() {
-  const tabelaContainer = document.getElementById("tabela-doces-container");
-  const btn = document.getElementById("toggle-tabela-doces-btn");
-  if (tabelaContainer.style.display === "none") {
-    tabelaContainer.style.display = "";
-    btn.style.backgroundColor = "blue";
-    btn.innerText = "Ocultar tabela de Doces e Sorvetes";
-  } else {
-    tabelaContainer.style.display = "none";
-    btn.style.backgroundColor = "var(--secondary-color)";
-    btn.innerText = "Mostrar tabela de Doces e Sorvetes";
-  }
+  toggleTabela(
+    "tabela-doces-container",
+    "toggle-tabela-doces-btn",
+    "Doces e Sorvetes"
+  );
 }

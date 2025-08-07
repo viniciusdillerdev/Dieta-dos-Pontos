@@ -123,11 +123,20 @@ tbody tr:hover {
 td {
   padding: 12px 15px;
   border-bottom: 1px solid var(--border-color);
+  text-align: center;
 }
 
-td:nth-child(2),
-td:nth-child(3) {
-  text-align: center;
+/* --- ALTERAÇÃO: Estilos para a célula de ações --- */
+.actions-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Espaço entre os botões e o contador */
+}
+
+.actions-cell span {
+  font-weight: bold;
+  min-width: 20px; /* Garante que o número não pule */
 }
 
 td button {
@@ -145,9 +154,17 @@ td button:hover {
   background-color: #218838;
 }
 
+.remove-btn {
+  background-color: #dc3545;
+}
+
+.remove-btn:hover {
+  background-color: #c82333;
+}
+
 /* Oculta as tabelas por padrão */
 [id^="tabela-"][id$="-container"] {
-  display: block; /* Garante que as tabelas estejam visíveis inicialmente */
+  display: none;
 }
 
 /* Media Queries para responsividade */
@@ -169,7 +186,6 @@ td button:hover {
     margin: 5px 10px;
   }
 
-  /* Organiza os botões em uma única linha no desktop */
   .button-group {
     display: flex;
     flex-wrap: wrap;
@@ -214,26 +230,34 @@ td button:hover {
     border: none;
     border-bottom: 1px solid var(--border-color);
     position: relative;
-    padding-left: 50%; /* Mantém o espaço para o rótulo */
-    text-align: right; /* Alinha o texto à direita */
-
-    /* --- ALTERAÇÃO 1: MAIS ESPAÇO VERTICAL --- */
-    /* Adiciona um preenchimento superior e inferior a TODAS as células, incluindo "Adicionar" */
-    padding-top: 12px;
-    padding-bottom: 12px;
-    min-height: 44px; /* Garante uma altura mínima para toque */
+    padding-left: 50%;
+    text-align: right;
+    min-height: 44px;
+    display: flex; /* Flexbox para alinhar o conteúdo */
+    align-items: center; /* Alinha verticalmente */
+    justify-content: flex-end; /* Alinha à direita */
   }
 
   tr:last-child td:last-child {
     border-bottom: none;
   }
 
+  /* --- ALTERAÇÃO: Oculta o conteúdo da célula de ações --- */
+  .actions-cell {
+    padding-left: 50%; /* Mantém o mesmo padding das outras células */
+  }
+
+  .actions-cell span,
+  .actions-cell button {
+    position: static;
+    transform: none;
+  }
+
   td:before {
     position: absolute;
-    /* --- ALTERAÇÃO 2: MELHOR ALINHAMENTO VERTICAL DO RÓTULO --- */
     top: 50%;
-    transform: translateY(-50%); /* Centraliza o rótulo verticalmente */
-    left: 15px; /* Um pouco de espaço da borda */
+    transform: translateY(-50%);
+    left: 15px;
     width: 45%;
     padding-right: 10px;
     white-space: nowrap;
@@ -241,7 +265,7 @@ td button:hover {
     font-weight: bold;
   }
 
-  /* Mapeamento de conteúdo para células de tabela */
+  /* --- ALTERAÇÃO: Mapeamento de conteúdo atualizado --- */
   td:nth-of-type(1):before {
     content: "ALIMENTO";
   }
@@ -252,13 +276,17 @@ td button:hover {
     content: "PONTOS";
   }
   td:nth-of-type(4):before {
-    content: "Adicionar";
+    content: "Ações";
   }
 
-  td button {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
+  /* --- ALTERAÇÃO: Garante que os controles de ação fiquem na mesma linha --- */
+  .actions-cell:before {
+    content: "Ações";
+  }
+  .actions-cell {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
   }
 }
