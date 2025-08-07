@@ -66,7 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     historico.push(novoRegistro);
     localStorage.setItem("historicoPontos", JSON.stringify(historico));
-    alert(`Dia ${dataFormatada} salvo com ${totalPontosHoje} pontos!`);
+    alert(
+      `Dia ${dataFormatada} salvo com ${totalPontosHoje} pontos!\n Role para baixo para ver o histórico.`
+    );
     carregarHistorico();
     if (typeof resetar === "function") {
       resetar();

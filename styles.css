@@ -1,12 +1,13 @@
 /* Configurações básicas e tipografia */
+/* Onde as cores são definidas */
 :root {
-  --primary-color: #007bff;
-  --secondary-color: #6c757d;
-  --background-color: #f8f9fa;
+  --primary-color: #0096c7; /* Azul cerúleo */
+  --secondary-color: #343a40; /* Cinza bem escuro (Charcoal) */
+  --background-color: #f7f9fc; /* Fundo com tom azulado frio */
   --card-background: #ffffff;
-  --header-background: #0056b3;
+  --header-background: #0077b6; /* Azul mais escuro para cabeçalhos */
   --text-color: #333;
-  --border-color: #dee2e6;
+  --border-color: #e9ecef;
 }
 
 * {
