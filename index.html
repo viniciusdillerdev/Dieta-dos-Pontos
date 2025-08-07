@@ -15,6 +15,15 @@
       <div class="fixed-total-content">
         🍐Total de pontos do dia: <span id="total">0</span>
       </div>
+
+      <button
+        id="salvar-dia-btn"
+        class="reset-btn-fixed"
+        style="background-color: #007bff"
+      >
+        Salvar dia
+      </button>
+
       <button class="reset-btn-fixed" onclick="resetar()">
         Resetar Pontos
       </button>
@@ -328,7 +337,13 @@
       </table>
     </div>
 
+    <div class="historico-container">
+      <h2>Histórico de Pontos</h2>
+      <ul id="lista-historico"></ul>
+    </div>
+
     <script src="./structs.js"></script>
     <script src="./prog.js"></script>
+    <script src="./histórico.js"></script>
   </body>
 </html>
